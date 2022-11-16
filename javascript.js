@@ -1,8 +1,24 @@
 // `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}`
 var API_KEY = "1401623932563c24702a8d3ac1d62c4b";
 var weatherApiRoot = "https://api.openweathermap.org";
-var searchButton = document.querySelector("#Search");
-var searchBox = document.querySelector("#searchInput");
+var searchButton = document.querySelector("#search");
+var searchBox = document.querySelector("#form");
+var searchInput = document.querySelector("#searchInput");
+var weatherSection = document.querySelector("#Todays-Forecast");
+
+function renderWeather(city, weather) {
+  var tempF = weather.main.temp;
+  var title = document.createElement("h2");
+  title.setAttribute("class", "cityName");
+  title.textContent = `${city}`;
+
+  var temperature = document.createElement("p");
+  temperature.setAttribute("class", "temperature");
+  temperature.textContent = `temperature: ${tempF}F`;
+
+  weatherSection.append(title, temperature);
+}
+
 function fetchAPI(location) {
   var { lat } = location;
   var { lon } = location;
@@ -14,6 +30,7 @@ function fetchAPI(location) {
     })
     .then(function (data) {
       console.log(city, data);
+      renderWeather(city, data);
     })
     .catch(function (error) {
       console.error(error);
@@ -37,18 +54,19 @@ function getCoordinates(search) {
       console.error(error);
     });
 }
-
-searchBox.addEventListener("submit", function (event) {
-  if (!searchBox.value) {
+function handleGetWeather(event) {
+  if (!searchInput.value) {
     return;
   }
   event.preventDefault();
-  let search = searchBox.value.trim();
+  let search = searchInput.value.trim();
   getCoordinates(search);
-  searchBox.value = "";
-});
-searchButton.addEventListener("click", function (event) {
-  var btn = event.target;
-  var search = btn.getAttribute("data-search");
-  getCoordinates(search);
-});
+  searchInput.value = "";
+}
+searchBox.addEventListener("submit", handleGetWeather);
+
+// searchButton.addEventListener("submit", function (event) {
+//   var btn = event.target;
+//   var search = btn.getAttribute("data-search");
+//   getCoordinates(search);
+// });
