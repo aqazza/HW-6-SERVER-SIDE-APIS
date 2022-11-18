@@ -1,5 +1,5 @@
 // `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}`
-var API_KEY = "1401623932563c24702a8d3ac1d62c4b";
+var API_KEY = "282b70812a662caa0202f2918682c6c7";
 var weatherApiRoot = "https://api.openweathermap.org";
 var searchButton = document.querySelector("#search");
 var searchBox = document.querySelector("#form");
@@ -23,14 +23,16 @@ function fetchAPI(location) {
   var { lat } = location;
   var { lon } = location;
   var city = location.name;
-  const apiUrl = `${weatherApiRoot}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+  const apiUrl = `${weatherApiRoot}/data/3.0/onecall?units=imperial&lat=${lat}&lon=${lon}&appid=${API_KEY}`;
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
+      //this console log will log the shape of data returned
       console.log(city, data);
-      renderWeather(city, data);
+      //depending on shape of data, send what you need to the renderWeather function
+      renderWeather(city, data.list[0]);
     })
     .catch(function (error) {
       console.error(error);
