@@ -4,10 +4,10 @@ var weatherApiRoot = "https://api.openweathermap.org";
 var searchButton = document.querySelector("#search");
 var searchBox = document.querySelector("#form");
 var searchInput = document.querySelector("#searchInput");
-var weatherSection = document.querySelector("#Todays-Forecast");
+var weatherSection = document.querySelector("#todays-forecast");
 
 function renderWeather(city, weather) {
-  var tempF = weather.main.temp;
+  var tempF = weather.temp.day;
   var title = document.createElement("h2");
   title.setAttribute("class", "cityName");
   title.textContent = `${city}`;
@@ -17,6 +17,26 @@ function renderWeather(city, weather) {
   temperature.textContent = `temperature: ${tempF}F`;
 
   weatherSection.append(title, temperature);
+}
+
+function renderForecast(city, weather) {
+  console.log(weather)
+  for (let index = 1; index < 6; index++) {
+    console.log(weather[index])
+    const forecastCard = document.createElement("div")
+
+    // one of these for every property neede
+    const forecastCardTemp = document.createElement("div")
+    const forecastCardHumidity = document.createElement("div")
+    forecastCardTemp.innerHTML = `Temperature: ${weather[index].temp.day}`
+    forecastCardHumidity.innerHTML = `Humidity: ${weather[index].humidity}`
+
+    // one of these for every property neede
+    forecastCard.appendChild(forecastCardTemp)
+    forecastCard.appendChild(forecastCardHumidity)
+
+    weatherSection.appendChild(forecastCard)
+  }
 }
 
 function fetchAPI(location) {
@@ -32,7 +52,8 @@ function fetchAPI(location) {
       //this console log will log the shape of data returned
       console.log(city, data);
       //depending on shape of data, send what you need to the renderWeather function
-      renderWeather(city, data.list[0]);
+      renderWeather(city, data.daily[0]);
+      renderForecast(city, data.daily)
     })
     .catch(function (error) {
       console.error(error);
