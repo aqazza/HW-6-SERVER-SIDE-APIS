@@ -4,15 +4,33 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
     <title>Weather Application</title>
   </head>
+  <div class="jumbotron" id="jumbotron">
+    <h1 class="display-4">Find your city's weather</h1>
+    <p class="lead">
+      - - - - - - - -
+      <i class="fa-solid fa-cloud-sun" style="font-size: 100px"></i>
+    </p>
+    <p id="currentDay" class="lead"></p>
+  </div>
   <body>
+    <div class="card">Search in the navigation bar</div>
     <form id="form">
       <input id="searchInput" type="text" />
       <button id="search">Search</button>
     </form>
-    <section id="todays-forecast"></section>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <section id="todays-forecast">
+      <h2 id="city"></h2>
+      <p id="temperature"></p>
+      <p id="weather-description"></p>
+    </section>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
     <script src="./javascript.js"></script>
   </body>
 </html>

@@ -20,22 +20,39 @@ function renderWeather(city, weather) {
 }
 
 function renderForecast(city, weather) {
-  console.log(weather)
+  console.log(weather);
+  weatherSection.innerHTML = "";
+
+  const forecastContainer = document.createElement("div");
+  forecastContainer.classList.add("forecast-container");
+
   for (let index = 1; index < 6; index++) {
-    console.log(weather[index])
-    const forecastCard = document.createElement("div")
+    const forecastCard = document.createElement("div");
+    forecastCard.setAttribute("class", "forecast-card");
+    const forecastCardTitle = document.createElement("h3");
+    forecastCardTitle.setAttribute("class", "forecast-card-title");
+
+    const forecastCardTemp = document.createElement("div");
+    const forecastCardHumidity = document.createElement("div");
+    forecastCardTemp.setAttribute("class", "temperature");
+    forecastCardHumidity.setAttribute("class", "humidity");
+    forecastCardTemp.innerHTML = `Temperature: ${weather[index].temp.day}°F`;
+    forecastCardHumidity.innerHTML = `Humidity: ${weather[index].humidity}%`;
+
+    const forecastCardDate = new Date();
+    forecastCardDate.setDate(forecastCardDate.getDate() + index);
+    const dayOfWeek = forecastCardDate.toLocaleString("en-us", {
+      weekday: "long",
+    });
+    forecastCardTitle.textContent = `${dayOfWeek}`;
 
     // one of these for every property neede
-    const forecastCardTemp = document.createElement("div")
-    const forecastCardHumidity = document.createElement("div")
-    forecastCardTemp.innerHTML = `Temperature: ${weather[index].temp.day}`
-    forecastCardHumidity.innerHTML = `Humidity: ${weather[index].humidity}`
 
-    // one of these for every property neede
-    forecastCard.appendChild(forecastCardTemp)
-    forecastCard.appendChild(forecastCardHumidity)
+    forecastCard.appendChild(forecastCardTitle);
+    forecastCard.appendChild(forecastCardTemp);
+    forecastCard.appendChild(forecastCardHumidity);
 
-    weatherSection.appendChild(forecastCard)
+    weatherSection.appendChild(forecastCard);
   }
 }
 
@@ -53,7 +70,7 @@ function fetchAPI(location) {
       console.log(city, data);
       //depending on shape of data, send what you need to the renderWeather function
       renderWeather(city, data.daily[0]);
-      renderForecast(city, data.daily)
+      renderForecast(city, data.daily);
     })
     .catch(function (error) {
       console.error(error);
