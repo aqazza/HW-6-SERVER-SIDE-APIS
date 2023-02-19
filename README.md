@@ -54,13 +54,17 @@ OpenWeather API
 
 ## Usage
 
-To use the application, simply open it in your browser and enter a city name in the search bar. The application will display the current weather conditions and the 5-day forecast for the city. You can search for multiple cities and view their weather conditions by clicking on their names in the search history.
+To use the application, simply open it in your browser and enter a city name in the search bar.
+
+The application will display the current weather conditions and the 5-day forecast for the city.
+
+You can search for multiple cities and view their weather conditions by clicking on their names in the search history.
 
 ## Links
 
-Deployed Application
+[Deployed Application](https://aqazza.github.io/HW-6-SERVER-SIDE-APIS/)
 
-GitHub Repository
+[GitHub Repo](https://github.com/aqazza/HW-6-SERVER-SIDE-APIS)
 
 ## License
 
