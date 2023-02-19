@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f1f1f1;
+  background-color: #e7d9d9;
 }
 
 .jumbotron {
@@ -93,6 +93,13 @@ body {
 }
 
 .forecast-card {
-  width: 30%;
+  width: 15%;
   margin-bottom: 10px;
+  display: flex;
+  background-image: url("./669958_weather_cloud_forecast_sun_icon.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: row;
+  opacity: 0.4;
 }
